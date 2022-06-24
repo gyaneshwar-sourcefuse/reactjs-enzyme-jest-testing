@@ -17,12 +17,20 @@ const PostsComponent = (props) => {
           <Col lg={4} className="mb-3 post" key={post.id}>
             <Card>
               <Card.Body>
-                <Card.Title>{post.id}. {post.title}</Card.Title>
+                <Card.Title>
+                  {post.id}. {post.title}
+                </Card.Title>
                 <Card.Text>{post.body}</Card.Text>
               </Card.Body>
-                <Card.Footer className="d-flex justify-content-end">
-                    <Button variant="danger" onClick={() => deletePost({ id: post.id })}>Remove</Button>
-                </Card.Footer>
+              <Card.Footer className="d-flex justify-content-end">
+                <Button
+                  variant="danger"
+                  onClick={() => deletePost({ id: post.id })}
+                  className="delete"
+                >
+                  Remove
+                </Button>
+              </Card.Footer>
             </Card>
           </Col>
         ))}
@@ -41,7 +49,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPosts: () => dispatch(fetchPosts()),
-    deletePost: (id) => dispatch(deletePost(id))
+    deletePost: (id) => dispatch(deletePost(id)),
   };
 };
 
