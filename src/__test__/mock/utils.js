@@ -1,11 +1,11 @@
 import moxios from "moxios";
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
-import thunk from "redux-thunk";
-import { postsInitialState } from "../../redux/slices/postsSlice";
-import { posts } from "./data";
+import { store } from "../../redux/store";
 
 export const WrapProvider = (OriginalComponent) => {
+  return <Provider store={store}>{OriginalComponent}</Provider>;
+};
+
 /**
  * 
  * @param {object} data { status: number, response: object } 
