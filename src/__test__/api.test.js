@@ -2,6 +2,7 @@ import moxios from "moxios";
 import Sinon from "sinon";
 import { url, getPosts, deletePostById } from "../api";
 import { posts } from "./mock/data";
+import { mockApi, mockWait } from "./mock/utils";
 
 describe("API test", () => {
   beforeEach(() => {
@@ -13,7 +14,7 @@ describe("API test", () => {
   });
 
   it("should return the posts", (done) => {
-    moxios.stubRequest(url("posts"), {
+    mockApi(url("posts"), {
       status: 200,
       response: posts,
     });
@@ -21,7 +22,7 @@ describe("API test", () => {
     let onFulfilled = Sinon.spy();
     getPosts().then(onFulfilled);
 
-    moxios.wait(() => {
+    mockWait(() => {
       const response = onFulfilled.getCall(0).args[0].data;
       expect(response).toEqual(posts);
       done();
@@ -32,7 +33,7 @@ describe("API test", () => {
 
     const post = posts[0];
 
-    moxios.stubRequest(url("posts/1"), {
+    mockApi(url("posts/1"), {
       status: 200,
       response: post,
     });
@@ -40,7 +41,7 @@ describe("API test", () => {
     let onFulfilled = Sinon.spy();
     deletePostById(post.id).then(onFulfilled);
 
-    moxios.wait(() => {
+    mockWait(() => {
       const response = onFulfilled.getCall(0).args[0].data;
       expect(response).toEqual(post);
       done();

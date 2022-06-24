@@ -2,6 +2,7 @@ import moxios from "moxios";
 import { deletePost, fetchPosts } from "../../redux/slices/postsSlice";
 import { store } from "../../redux/store";
 import { posts } from "../mock/data";
+import { mockResponse } from "../mock/utils";
 
 describe("Posts redux", () => {
   beforeEach(() => {
@@ -13,12 +14,9 @@ describe("Posts redux", () => {
   });
 
   it("should update the posts correctly", async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: posts,
-      });
+    mockResponse({
+      status: 200,
+      response: posts,
     });
 
     await store.dispatch(fetchPosts());
@@ -31,12 +29,9 @@ describe("Posts redux", () => {
 
     const expectedState = posts.slice(0, 2);
 
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: payload,
-      });
+    mockResponse({
+      status: 200,
+      response: payload,
     });
 
     await store.dispatch(fetchPosts());
