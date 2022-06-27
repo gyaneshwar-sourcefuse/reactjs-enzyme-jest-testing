@@ -19,6 +19,17 @@ export const mockResponse = (data) => {
 
 /**
  * 
+ * @param {object} data { status: number, response: object } 
+ */
+ export const mockError = (data) => {
+  return moxios.wait(() => {
+    const request = moxios.requests.mostRecent();
+    return request.reject(data);
+  });
+};
+
+/**
+ * 
  * @param {string} url api url 
  * @param {*} data { status: number, response: object } 
  */
