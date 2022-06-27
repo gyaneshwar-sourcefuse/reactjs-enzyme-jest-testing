@@ -23,6 +23,12 @@ export const postsSlice = createSlice({
     deletePost: (state, action) => {
       state.posts = state.posts.filter((post) => post.id !== action.payload.id);
     },
+    deleteAllPosts: (state, action) => {
+      state.posts = [];
+    },
+    setPostsError: (state, action) => {
+      state.error = null;
+    }
   },
   extraReducers: {
     [fetchPosts.pending]: (state, action) => {
