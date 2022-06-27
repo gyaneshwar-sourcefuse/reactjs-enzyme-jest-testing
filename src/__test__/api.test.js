@@ -1,3 +1,4 @@
+import axios from "../api/axios";
 import moxios from "moxios";
 import Sinon from "sinon";
 import { url, getPosts, deletePostById } from "../api";
@@ -6,15 +7,15 @@ import { mockApi, mockWait } from "./mock/utils";
 
 describe("API test", () => {
   beforeEach(() => {
-    moxios.install();
+    moxios.install(axios);
   });
 
   afterEach(() => {
-    moxios.uninstall();
+    moxios.uninstall(axios);
   });
 
   it("should return the posts", (done) => {
-    mockApi(url("posts"), {
+    mockApi("posts", {
       status: 200,
       response: posts,
     });
@@ -33,7 +34,7 @@ describe("API test", () => {
 
     const post = posts[0];
 
-    mockApi(url("posts/1"), {
+    mockApi("posts/1", {
       status: 200,
       response: post,
     });
