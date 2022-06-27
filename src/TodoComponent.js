@@ -83,11 +83,12 @@ export default function TodoComponent() {
             type="text"
             onChange={(e) => setText(e.target.value)}
             id="todoInput"
+            data-testid="todoInput"
             value={text}
           />
         </Col>
         <Col lg={2}>
-          <Button onClick={add} id="todoAddBtn" className="w-100">
+          <Button onClick={add} id="todoAddBtn" className="w-100" data-testid="todoAddBtn">
             Add
           </Button>
         </Col>
@@ -97,10 +98,11 @@ export default function TodoComponent() {
         <Col lg={12}>
           {todos?.map?.((todo) => {
             return (
-              <Card key={todo.id} className="todo-wrapper mb-3">
+              <Card key={todo.id} className="todo-wrapper mb-3" data-testid="todo">
                 <Card.Body
                   onClick={() => completed(todo.id)}
                   className={todo.is_completed ? "strike todo" : "todo"}
+                  data-testid="todo-body"
                 >
                   {todo.text}
                 </Card.Body>
