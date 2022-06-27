@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { deletePost, fetchPosts } from "./redux/slices/postsSlice";
 
 const PostsComponent = (props) => {
-  const { fetchPosts, posts = [], deletePost } = props;
+  const { fetchPosts, posts, deletePost } = props;
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
@@ -14,7 +14,7 @@ const PostsComponent = (props) => {
       <h2>Posts:</h2>
       <Row>
         {posts.map((post) => (
-          <Col lg={4} className="mb-3 post" key={post.id}>
+          <Col lg={4} className="mb-3 post" key={post.id} data-testid="post">
             <Card>
               <Card.Body>
                 <Card.Title>
