@@ -36,9 +36,11 @@ export const postsSlice = createSlice({
     },
     [fetchPosts.fulfilled]: (state, action) => {
         state.posts = action.payload;
+        state.error = null;
         state.loading = false;
     },
     [fetchPosts.rejected]: (state, action) => {
+        state.posts = [];
         state.error = action.payload;
         state.loading = false;
     }
