@@ -7,12 +7,12 @@ export const postsInitialState = {
   loading: false
 };
 
-export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async (_, { rejectWithValue }) => {
   try {
     const res = await getPosts();
     return res.data;
   } catch (error) {
-    return error.toString();
+    return rejectWithValue(error.response.data);
   }
 });
 
