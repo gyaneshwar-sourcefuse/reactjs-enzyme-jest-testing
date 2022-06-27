@@ -1,23 +1,24 @@
-import moxios from "moxios";
-import { deletePost, fetchPosts } from "../../redux/slices/postsSlice";
+import axios from "../../api/axios";
+import { deletePost, fetchPosts, deleteAllPosts, setPostsError } from "../../redux/slices/postsSlice";
 import { store } from "../../redux/store";
 import { posts } from "../mock/data";
-import { mockResponse } from "../mock/utils";
+import MockAdapter from "axios-mock-adapter";
 
-describe("Posts redux", () => {
-  beforeEach(() => {
-    moxios.install();
+describe.only("Posts redux", () => {
+  let mock;
+  beforeEach( async () => {
+    mock = new MockAdapter(axios);
+    await store.dispatch(deleteAllPosts({ posts: [] }));
+    await store.dispatch(setPostsError({ error: null }));
   });
 
   afterEach(() => {
-    moxios.uninstall();
+    mock.reset();
   });
 
   it("should update the posts correctly", async () => {
-    mockResponse({
-      status: 200,
-      response: posts,
-    });
+    
+    mock.onGet("posts").reply(200, posts);
 
     await store.dispatch(fetchPosts());
     const state = store.getState();
@@ -29,15 +30,22 @@ describe("Posts redux", () => {
 
     const expectedState = posts.slice(0, 2);
 
-    mockResponse({
-      status: 200,
-      response: payload,
-    });
+    mock.onGet("posts").reply(200, payload);
 
     await store.dispatch(fetchPosts());
     await store.dispatch(deletePost({ id: 3 }));
     const state = store.getState();
 
     expect(state.posts.posts).toEqual(expectedState);
+  });
+
+  it('should set error - fetchPosts', async () => {
+    
+    const error = { message: "Error fetching posts" };
+    mock.onGet("posts").reply(500, error);
+    
+    await store.dispatch(fetchPosts())
+    const state = store.getState();
+    expect(state.posts.error).toEqual(error);
   });
 });
