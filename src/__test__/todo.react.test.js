@@ -1,11 +1,7 @@
 import {
   fireEvent,
-  queryAllByTestId,
-  queryByText,
   render,
   screen,
-  waitFor,
-  waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
 import TodoComponent, { ACTION, initialState, reducer } from "../TodoComponent";
