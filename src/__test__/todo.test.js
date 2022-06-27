@@ -15,7 +15,7 @@ const component = () => {
     };
 };
 
-describe("TodoComponent component", () => {
+describe.skip("TodoComponent component", () => {
 
     it('should render TodoComponent component', () => {
         const component = renderer.create(<TodoComponent />);

@@ -8,7 +8,7 @@ import { mockResponse, WrapProvider } from "./mock/utils";
 import axios from "../api/axios";
 
 
-describe.only("PostsComponent", () => {
+describe.skip("PostsComponent", () => {
   beforeEach(() => {
     moxios.install(axios);
   });
