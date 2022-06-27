@@ -31,7 +31,7 @@ export const mockResponse = (data) => {
 /**
  * 
  * @param {string} url api url 
- * @param {*} data { status: number, response: object } 
+ * @param {object} data { status: number, response: object } 
  */
 export const mockApi = (url, data) => {
   return moxios.stubRequest(url, data);
