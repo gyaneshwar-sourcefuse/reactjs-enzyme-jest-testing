@@ -1,7 +1,7 @@
 import axios from "../api/axios";
 import moxios from "moxios";
 import Sinon from "sinon";
-import { url, getPosts, deletePostById } from "../api";
+import { url, getPosts, deletePostById, BASE_URL } from "../api";
 import { posts } from "./mock/data";
 import { mockApi, mockWait } from "./mock/utils";
 
@@ -12,6 +12,13 @@ describe("API test", () => {
 
   afterEach(() => {
     moxios.uninstall(axios);
+  });
+
+  it("url() method should return the url", () => {
+
+    const str = url("posts");
+    expect(str).toEqual(`${BASE_URL}/posts`);
+
   });
 
   it("should return the posts", (done) => {
