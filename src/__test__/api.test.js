@@ -5,7 +5,7 @@ import { url, getPosts, deletePostById, BASE_URL } from "../api";
 import { posts } from "./mock/data";
 import { mockApi, mockWait } from "./mock/utils";
 
-describe.skip("API test", () => {
+describe("API test", () => {
   beforeEach(() => {
     moxios.install(axios);
   });

@@ -4,7 +4,7 @@ import { store } from "../../redux/store";
 import { posts } from "../mock/data";
 import MockAdapter from "axios-mock-adapter";
 
-describe.skip("Posts redux", () => {
+describe("Posts redux", () => {
   let mock;
   beforeEach( async () => {
     mock = new MockAdapter(axios);
