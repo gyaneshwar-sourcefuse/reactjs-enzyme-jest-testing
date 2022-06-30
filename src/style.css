@@ -25,3 +25,9 @@ p {
 .remove {
   padding: 0 5px;
 }
+
+.error {
+  color: red;
+  font-weight: 600;
+  font-size: 12px;
+}
